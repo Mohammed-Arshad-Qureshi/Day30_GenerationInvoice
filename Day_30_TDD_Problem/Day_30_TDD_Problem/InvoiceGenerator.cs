@@ -49,5 +49,27 @@ namespace Day_30_TDD_Problem
             }
             return Math.Max(totalFare, MINIMUM_FARE);
         }
+        /// <summary>
+        /// Creating method for calculating Totalfare of multiple rides based on distance and time
+        /// </summary>
+        /// <param name="rides"></param>
+        /// <returns></returns>
+        /// <exception cref="CabInvoiceException"></exception>
+        public double CalculateFare(Ride[] rides)
+        {
+            double totalFare = 0;
+            try
+            {
+                foreach (Ride ride in rides)
+                {
+                    totalFare += CalculateFare(ride.distance, ride.time);
+                }
+            }
+            catch (Exception)
+            {
+                throw new CabInvoiceException(CabInvoiceException.ExceptionType.NULL_RIDE, "Ride should not be null");
+            }
+            return Math.Max(totalFare, MINIMUM_FARE);
+        }
     }
 }

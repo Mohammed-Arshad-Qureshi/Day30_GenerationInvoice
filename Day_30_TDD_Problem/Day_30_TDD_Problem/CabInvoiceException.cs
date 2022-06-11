@@ -8,7 +8,7 @@ namespace Day_30_TDD_Problem
     {
         public enum ExceptionType
         {
-            INVALID_DISTANCE, INVALID_TIME
+            INVALID_DISTANCE, INVALID_TIME, NULL_RIDE
         }
         public ExceptionType type;
         public CabInvoiceException(ExceptionType type, string message) : base(message) // Creating a constructor with parent class
