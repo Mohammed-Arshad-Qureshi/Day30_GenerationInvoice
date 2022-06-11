@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Day_30_TDD_Problem;
 namespace TesingOnPracticeProblem
 {
+
     [TestClass]
     public class UnitTest1
     {
@@ -42,6 +43,28 @@ namespace TesingOnPracticeProblem
             InvoiceSummary expected = new InvoiceSummary(70, rides.Length);
             //Act
             InvoiceSummary actual = invoiceGenerator.CalculateFare(rides);
+            //Assert
+            Assert.AreEqual(expected, actual);
+            //expected.Equals(actual);
+        }
+        /// <summary>
+        /// Given distance and time of multiple rides should rerurns average , number of rides,and total fare for particular user id
+        /// </summary>
+        [TestMethod]
+        public void GivenMultipleRidesShouldReturnsAggregateTotalFareWithAverageForParticularUserID()
+        {
+            //Arrange
+            InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+            RideRepository rideRepository = new RideRepository();
+            Ride[] rides = { new Ride(3, 25), new Ride(0.5, 10) };
+            string userId = "1";
+            rideRepository.AddRides(userId, rides);
+            Ride[] ride2 = { new Ride(2.0, 5), new Ride(0.1, 1) };
+            string userId2 = "2";
+            rideRepository.AddRides(userId2, ride2);
+            InvoiceSummary expected = new InvoiceSummary(70, rides.Length);
+            //Act
+            InvoiceSummary actual = invoiceGenerator.GetInvoiceSummary(userId);
             //Assert
             Assert.AreEqual(expected, actual);
             //expected.Equals(actual);

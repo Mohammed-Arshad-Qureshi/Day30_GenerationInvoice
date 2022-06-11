@@ -6,6 +6,7 @@ namespace Day_30_TDD_Problem
 {
     public class InvoiceGenerator
     {
+        RideRepository rideRepository = new RideRepository();
         /// <summary>
         /// Declaring some variable
         /// </summary>
@@ -71,6 +72,23 @@ namespace Day_30_TDD_Problem
             }
             double result = Math.Max(totalFare, MINIMUM_FARE);
             return new InvoiceSummary(result, rides.Length);
+        }
+        /// <summary>
+        /// Getting array of multiple rides and calculate total fare
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="CabInvoiceException"></exception>
+        public InvoiceSummary GetInvoiceSummary(string userId)
+        {
+            try
+            {
+                return this.CalculateFare(RideRepository.GetRides(userId));
+            }
+            catch (CabInvoiceException)
+            {
+                throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_ID, "User ID is invalid");
+            }
         }
     }
 }
